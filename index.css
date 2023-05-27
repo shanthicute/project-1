@@ -1,0 +1,127 @@
+.container {
+    background: ghostwhite;
+    width: 400px;
+    margin: auto;
+    display: flex;
+}
+.child1 {
+    width: 200px;
+    background-color: blue;
+    border-radius: 15px;
+    height: 500px;
+}
+div#subchild {
+    margin: auto;
+}
+#subchild h3 {
+    margin-left: 45px;
+    padding: 12px;
+    color: aliceblue;
+}
+.img {
+    border: 1px solid darkblue;
+    border-radius: 200px;
+    color: seagreen;
+    height: 180px;
+}
+.img h1 {
+    font-size: 55px;
+    color: aliceblue;
+    padding: 0px;
+    position: relative;
+    left: 77px;
+}
+.img p {
+    position: relative;
+    left: 65px;
+    bottom: 58px;
+    color: darkseagreen;
+    font-size: 15px;
+}
+h2 {
+    margin-left: 62px;
+    color: aliceblue;
+    font-size: 30px;
+    padding: 0px;
+}
+p {
+    padding: 0px;
+    margin-left: 22px;
+    font-size: 13px;
+    color: gainsboro;
+}
+.child2 {
+    width: 200px;
+}
+.child2 {
+    width: 200px;
+}
+.img1 {
+    width: 20px;
+}
+.img1 img {
+    width: 20px;
+    height: 10px;
+    position: relative;
+    top: 25px;
+}
+h4 {
+    position: relative;
+    left: 15px;
+}
+.img1 p {
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+.img2 {
+    width: 10px;
+    display: flex;
+    position: relative;
+    right: 10px;
+}
+.img2 img {
+    width: 25px;
+    height: 20px;
+    position: relative;
+    top: 20px;
+}
+h4 {
+    position: relative;
+    left: 15px;
+}
+.img2 p {
+    left: 4px;
+    position: relative;
+    top: 10px;
+}
+.img3 {
+    width: 30px;
+    display: flex;
+}
+.img3 img {
+    width: 15px;
+    height: 20px;
+    position: relative;
+    top: 12px;
+    right: 10px;
+}
+h4 {
+    position: relative;
+    left: 15px;
+}
+.img3 p {
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+.img4 img {
+    width: 20px;
+}
+.img1 {
+    width: 20px;
+    display: flex;
+    position: relative;
+    right: 10px;
+}
+
