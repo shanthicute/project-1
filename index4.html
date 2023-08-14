@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    h2 {
+      font-size: 50px;
+      font-family: "Times New Roman", Times, serif;
+      color: currentColor;
+      text-align: center;
+    }
+    body {
+      background-image: url(../image5.jpg);
+      background-repeat: no-repeat;
+      background-size: 1500px;
+      text-align: center;
+    }
+    form {
+      font-size: 40px;
+      color: darkblue;
+    }
+    input#go {
+    position: relative;
+    width: 37px;
+    left: 11px;
+}
+input#for {
+    position: relative;
+    width: 30px;
+}
+button {
+    background: lightcoral;
+    font-size: initial;
+}
+button#so {
+    background: aqua;
+}
+
+  </style>
+  <body>
+    <h2>Register here</h2>
+    <form>
+      <label for="fname">first name:</label><br />
+      <input type="" id="fname" placeholder="enter fname"><br />
+      <label for="lname">lastname:</label><br />
+      <input type="" name="" id="lname" placeholder="enter lname"><br />
+      <label for="age">your age:</label><br />
+      <input type="" name="" id="age" placeholder="enter age"><br />
+      <label for="email">your email</label><br />
+      <input type="text" id="email" placeholder="enter email"><br />
+      <label for="gender">gender</label><br />
+      <input  type="radio" name="gender" value="male" />male <br />
+      <input type="radio" id="go" name="gender" value="female" />female <br />
+      <input type="radio" name="gender" value="other" />other <br />
+
+      <label for="language">known language</label><br />
+      <input type="checkbox" id="for" name="language" value="telugu" />telugu <br />
+      <input type="checkbox"  id="went" name="language" value="hindi" />hindi <br />
+      <input type="checkbox" id="for" name="language" value="english" />english <br />
+      <input type="checkbox"  id="went" name="language" value="tamil" />tamil <br />
+      <br />
+      <button type="button" onclick="adduser()">submit</button>
+      <button  id="so" type="button" onclick="updateuser()">update</button>
+      <p>By clicking Sign Up,you agree to our <span>Terms & Conditions</span></p>
+    </form>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>fname</th>
+          <th>lname</th>
+          <th>age</th>
+          <th>email</th>
+          <th>gender</th>
+          <th>language</th>
+          <th>edit</th>
+          <th>delete</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      var users = [];
+      var allradiobtns = document.getElementsByName("gender");
+      var allcheckboxes = document.getElementsByName("language");
+
+      function adduser() {
+        var user = {
+          fname: "",
+          lname: "",
+          age: "",
+          email: "",
+          gender: "",
+          language: [],
+        };
+
+        for ( a in user) {
+          if (a !== "gender" && a !== "language") {
+            user[a] = document.getElementById(a).value;
+          } else if (a === "gender") {
+            allradiobtns.forEach((radio) => {
+              if (radio.checked) {
+                user.gender = radio.value;
+              }
+            });
+          } else if (a === "language") {
+            allcheckboxes.forEach((cb) => {
+              if (cb.checked) {
+                user.language.push(cb.value);
+              }
+            });
+          }
+        }
+
+        users.push(user);
+        
+        displayusers();
+        clearform();
+      }
+
+      function displayusers() {
+        document.querySelector("tbody").innerHTML = "";
+        users.forEach((usr, i) => {
+          var mytr = document.createElement("tr");
+          for (a in usr) {
+            var mytd = document.createElement("td");
+            mytd.innerHTML = usr[a];
+            mytr.appendChild(mytd);
+          }
+          var edittd = document.createElement("td");
+          var editbtn = document.createElement("button");
+          (editbtn.innerHTML = "edit"),
+            editbtn.setAttribute("onclick", "edituser(" + i + ")");
+          edittd.appendChild(editbtn);
+          mytr.appendChild(edittd);
+
+          var deletetd = document.createElement("td");
+          var deletebtn = document.createElement("button");
+          deletebtn.innerHTML = "delete";
+          deletebtn.setAttribute("onclick", "deleteuser((" + i + "))");
+          deletetd.appendChild(deletebtn);
+          mytr.appendChild(deletetd);
+          document.querySelector("tbody").appendChild(mytr);
+        });
+      }
+      function clearform() {
+        var user = {
+          fname: "",
+          lname: "",
+          age: "",
+          email: "",
+          gender: "",
+          language: [],
+        };
+        for (a in user) {
+          if (a !== "gender" && a !== "language") {
+            (document.getElementById(a).value = ""),
+              allradiobtns.forEach((radio) => {
+                radio.checked = false;
+              });
+            allcheckboxes.forEach((cb) => {
+              cb.checked = false;
+            });
+          }
+        }
+      }
+      function deleteuser(i) {
+        users = users.filter((usr, index) => {
+          return i != index;
+        });
+        displayusers();
+      }
+      function edituser(i) {
+        gindex = i;
+        for (a in users[i]) {
+          if (a != "gender" && a != "language") {
+            document.getElementById(a).value = users[i][a];
+            allradiobtns.forEach((radio) => {
+              if (radio.value == users[i].gender) {
+                radio.checked = true;
+              }
+            });
+          } else if (a == "language") {
+            allcheckboxes.forEach((cb) => {
+              console.log(users[i][a]);
+              users[i][a].forEach((val) => {
+                if (val == cb.value) {
+                  cb.checked = true;
+                }
+              });
+            });
+          }
+        }
+        // document.getElementById("updatebtn").style.display = "block";
+        // document.getElementById("addbtn").style.display = "none";
+      }
+      function updateuser() {
+        // document.getElementById("updatebtn").style.display = "block";
+        // document.getElementById("addbtn").style.display = "none";
+        var user = {
+          fname: "",
+          lname: "",
+          age: "",
+          email: "",
+          gender: "",
+          language: [],
+        };
+
+        for ( a in user) {
+          if (a !== "gender" && a !== "language") {
+            user[a] = document.getElementById(a).value;
+          } else if (a === "gender") {
+            allradiobtns.forEach((radio) => {
+              if (radio.checked) {
+                user.gender = radio.value;
+              }
+            });
+          } else if (a === "language") {
+            allcheckboxes.forEach((cb) => {
+              if (cb.checked) {
+                user.language.push(cb.value);
+              }
+            });
+          }
+        }
+        
+        users[gindex] = user;
+      displayusers();
+      clearform();
+      }
+     
+    </script>
+  </body>
+</html>
